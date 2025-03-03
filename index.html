@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pet Care App</title>
+    <title>Pet Care</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,7 +15,7 @@
             background: #007bff;
             color: white;
             padding: 15px;
-            text-align: center;
+            text-align: left;
             font-size: 24px;
             display: flex;
             justify-content: space-between;
@@ -57,6 +57,12 @@
             text-align: center;
             width: 250px;
         }
+        .service-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
         button {
             padding: 10px 20px;
             font-size: 16px;
@@ -75,9 +81,42 @@
             color: white;
             text-align: center;
             padding: 10px;
-            position: fixed;
             width: 100%;
-            bottom: 0;
+            position: relative;
+            margin-top: 20px;
+        }
+        .contact-form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            max-width: 500px;
+            margin: auto;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            .services {
+                flex-direction: column;
+                align-items: center;
+            }
+            .service-card {
+                width: 90%;
+            }
         }
     </style>
 </head>
@@ -94,6 +133,7 @@
     
     <div class="container" id="home">
         <h2>Your Pet's Best Friend</h2>
+        <img src="pet1.jpg" alt="Happy pets" width="50%" style="border-radius: 10px;">
         <p>We provide the best care for your pets. Click below to learn more about us.</p>
         <button onclick="showAboutUs()">Learn More</button>
     </div>
@@ -107,17 +147,38 @@
         <h2>Our Services</h2>
         <div class="services">
             <div class="service-card">
+                <img src="pet2.jpg" alt="Pet Grooming">
                 <h3>Pet Grooming</h3>
                 <p>Professional grooming to keep your pet clean and healthy.</p>
             </div>
             <div class="service-card">
+                <img src="pet4.jpg" alt="Veterinary Care">
                 <h3>Veterinary Care</h3>
                 <p>Expert medical checkups and treatments for your pet.</p>
             </div>
             <div class="service-card">
+                <img src="pet3.jpeg" alt="Pet Boarding">
                 <h3>Pet Boarding</h3>
                 <p>Safe and comfortable boarding services for your pets.</p>
             </div>
+        </div>
+    </div>
+    
+    <div class="container" id="contact">
+        <h2>Contact Us</h2>
+        <div class="contact-form">
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+                
+                <button type="submit">Send Message</button>
+            </form>
         </div>
     </div>
     
@@ -132,4 +193,3 @@
     </script>
 </body>
 </html>
-
