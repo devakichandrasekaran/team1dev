@@ -136,6 +136,7 @@
         <img src="pet1.jpg" alt="Happy pets" width="50%" style="border-radius: 10px;">
         <p>We provide the best care for your pets. Click below to learn more about us.</p>
         <button onclick="showAboutUs()">Learn More</button>
+        <button onclick="fetchPetTips()">Get Pet Care Tips</button>
     </div>
     
     <div class="container" id="about" style="display: none;">
@@ -160,6 +161,7 @@
                 <img src="pet3.jpeg" alt="Pet Boarding">
                 <h3>Pet Boarding</h3>
                 <p>Safe and comfortable boarding services for your pets.</p>
+                <button onclick="checkBoardingAvailability()">Check Availability</button>
             </div>
         </div>
     </div>
@@ -167,7 +169,7 @@
     <div class="container" id="contact">
         <h2>Contact Us</h2>
         <div class="contact-form">
-            <form>
+            <form onsubmit="submitForm(event)">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
                 
@@ -187,6 +189,71 @@
     </footer>
     
     <script>
+        // Form Validation Function
+        function validateForm() {
+            let name = document.getElementById("name").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let message = document.getElementById("message").value.trim();
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (name === "" || email === "" || message === "") {
+                alert("All fields are required.");
+                return false;
+            }
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+            return true;
+        }
+
+        // Callback Function
+        function submitForm(event) {
+            event.preventDefault();
+            if (!validateForm()) return;
+
+            sendMessage(document.getElementById("name").value, (response) => {
+                alert(response);
+                document.querySelector("form").reset();
+            });
+        }
+
+        function sendMessage(name, callback) {
+            setTimeout(() => {
+                callback(`Thank you, ${name}. Your message has been sent!`);
+            }, 2000);
+        }
+
+        // Promise Function
+        function checkBoardingAvailability() {
+            checkAvailability()
+                .then((message) => alert(message))
+                .catch((error) => alert(error));
+        }
+
+        function checkAvailability() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    let available = Math.random() > 0.5;
+                    available ? resolve("Boarding space is available! 🎉") : reject("No boarding space available. 😞");
+                }, 2000);
+            });
+        }
+
+        // Async/Await Function
+        async function fetchPetTips() {
+            try {
+                let response = await getPetTips();
+                alert(response);
+            } catch {
+                alert("Failed to fetch pet care tips.");
+            }
+        }
+
+        function getPetTips() {
+            return new Promise((resolve) => setTimeout(() => resolve("🐶 Tip: Regular exercise keeps your pet healthy!"), 2000));
+        }
+
         function showAboutUs() {
             document.getElementById("about").style.display = "block";
         }
